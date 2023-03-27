@@ -1,22 +1,18 @@
-from flask import Flask
+import requests
+import pprint
 
-app = Flask(__name__)
+headers = {
+    'accept': 'application/json',
+    'Authorization': ["U7TCyPP1H/dN/NSqmby2ep6u9Mp2IJ+ymK4QhmZ/xkX7C4+IHA+CdHYHsGXEkIFvf/zYC4lwD1X02l0RC3d4nA=="],
+    'Content-Type': 'application/json',
+	}
 
-@app.route('/userscript.user.js')
-def userscript():
-    str = ""
-    try:
-        with open("highlighter.user.js", "r") as f:
-            str = f.read()
-    except Exception as e:
-        print("Warning: Cannot read file.: ", e)
+params = (
+    ('serviceKey', ["U7TCyPP1H/dN/NSqmby2ep6u9Mp2IJ+ymK4QhmZ/xkX7C4+IHA+CdHYHsGXEkIFvf/zYC4lwD1X02l0RC3d4nA=="]),
+	)
 
-    return str
+data = '{ "b_no": [ "1234567890" ]}'
 
-@app.route('/api')
-def api():
-    json = request.json(force=True)
-    
+response = requests.post('https://api.odcloud.kr/api/socialEnterpriseList/v1/authCompanyList', headers=headers, params=params, data=data)
 
-if __name__ == "__main__":
-    app.run(port=8081)
+pprint.pprint(response.json())
