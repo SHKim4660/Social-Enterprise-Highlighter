@@ -1,18 +1,13 @@
 import requests
+import xml.etree.ElementTree as ET
+from xml.etree.ElementTree import Element, dump, ElementTree
 import pprint
 
-headers = {
-    'accept': 'application/json',
-    'Authorization': ["U7TCyPP1H/dN/NSqmby2ep6u9Mp2IJ+ymK4QhmZ/xkX7C4+IHA+CdHYHsGXEkIFvf/zYC4lwD1X02l0RC3d4nA=="],
-    'Content-Type': 'application/json',
-	}
+page = 1
+url = (f"https://api.odcloud.kr/api/socialEnterpriseList/v1/authCompanyList?page{page}=&perPage=10&returnType=XML&serviceKey=U7TCyPP1H%2FdN%2FNSqmby2ep6u9Mp2IJ%2BymK4QhmZ%2FxkX7C4%2BIHA%2BCdHYHsGXEkIFvf%2FzYC4lwD1X02l0RC3d4nA%3D%3D")
 
-params = (
-    ('serviceKey', ["U7TCyPP1H/dN/NSqmby2ep6u9Mp2IJ+ymK4QhmZ/xkX7C4+IHA+CdHYHsGXEkIFvf/zYC4lwD1X02l0RC3d4nA=="]),
-	)
+response = requests.get(url)
+data = response.text
 
-data = '{ "b_no": [ "1234567890" ]}'
+print(type(data))
 
-response = requests.post('https://api.odcloud.kr/api/socialEnterpriseList/v1/authCompanyList', headers=headers, params=params, data=data)
-
-pprint.pprint(response.json())
