@@ -38,13 +38,13 @@ def pro_name(filename):
         pro_line = line[0].replace("㈜","").replace("(주)","").replace(" ","").replace("(유)","").replace("(사)","").replace("유)","").replace("(사단)","").replace("주)","").replace("(사단법인)","")
         pro_line_list.append([pro_line])
 
-# for i in range(1000):
-#     get_data(i,10)
-#     print(pro_data_list)
-#     save_data("raw_name_data.csv",pro_data_list)
+for i in range(1000):
+    get_data(i,10)
+    print(pro_data_list)
+    save_data("raw_name_data.csv",pro_data_list)
 
-file = open("raw_name_data.csv",'r')
-reader = csv.reader(file)
+# file = open("raw_name_data.csv",'r')
+# reader = csv.reader(file)
 
-pro_name("raw_name_data.csv")
-save_data("pro_name_data.csv",pro_line_list)
+# pro_name("raw_name_data.csv")
+# save_data("pro_name_data.csv",pro_line_list)
