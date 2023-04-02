@@ -1,21 +1,40 @@
 import requests
 import json
-pageNo = 1
-numOfRows = 10
+import csv
+import re
 
-url = 'http://apis.data.go.kr/B553530/RENEWABLE/ENTE_LIST'
-params ={'serviceKey' : 'U7TCyPP1H/dN/NSqmby2ep6u9Mp2IJ+ymK4QhmZ/xkX7C4+IHA+CdHYHsGXEkIFvf/zYC4lwD1X02l0RC3d4nA==', 'pageNo' : {pageNo}, 'numOfRows' : {numOfRows}, 'apiType' : 'json'}
+# "사회적기업정보" , "\data\pro_name_data.csv"
+# "K-RE100참여기업" , "\data\pro_KRE_data.csv"
 
-response = requests.get(url, params=params)
-data = json.loads(response.text)
-
-for i in range(numOfRows):
-    print(data.get("opentable").get("field")[i].get("ENTE_TERM"))
+pattern = r'\([^)]*\)'
+pro_data_list = []
 
 # (주),(유) 등 필요 없는거 날리기
-def pro_name(filename):
+def pro_data(name):
+    pro_data_list = []
+
+    if name == "사회적기업정보":
+        filename = "data\\raw_name_data.csv"
+        target_file = "data\pro_name_data.csv"
+
+    if name == "K-RE100참여기업":
+        filename = "data\\raw_KRE_data.csv"
+        target_file = "data\pro_KRE_data.csv"
+
     file = open(filename,'r')
     reader = csv.reader(file)
     for line in reader:
-        pro_line = line[0].replace("㈜","").replace("(주)","").replace(" ","").replace("(유)","").replace("(사)","").replace("유)","").replace("(사단)","").replace("주)","").replace("(사단법인)","")
-        pro_line_list.append([pro_line])
+        pro_data = re.sub(pattern=pattern, repl='', string= line[0]).replace("㈜","").replace("유)","").replace("주)","").replace("사)","")
+        pro_data_list.append([pro_data])
+    
+    save_data(target_file,pro_data_list)
+    print(pro_data_list)
+
+        
+def save_data(filename,index):
+    file = open(filename,'a',newline='')
+    writer = csv.writer(file)
+    writer.writerows(index)
+
+pro_data("사회적기업정보")
+pro_data("K-RE100참여기업")
