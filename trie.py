@@ -1,4 +1,5 @@
 from typing import Dict, Union, Tuple, Any
+import json
 
 class Trie:
     def __init__(self):
@@ -28,6 +29,7 @@ class Trie:
             else:
                 return False
 
+
 def serialize(tr: Trie):
     dictionary: Dict[str, Trie] = tr.chars
     result: Any = {}
@@ -35,7 +37,7 @@ def serialize(tr: Trie):
         result[key] = serialize(dictionary[key])
 
     if tr.char != "":
-        return (tr.char, result)
+        return [tr.char, result]
     
     return result
 
@@ -43,7 +45,7 @@ def deserialize(data):
     dict = data
     result = Trie()
     
-    if type(data) == tuple:
+    if type(data) == list:
         result.char = data[0]
         dict = data[1]
 
@@ -51,6 +53,13 @@ def deserialize(data):
         result.chars[key] = deserialize(dict[key])
 
     return result
+        
+def from_json(dump: str):
+    data = json.loads(dump)
+    return deserialize(data)
+
+def to_json(tr: Trie):
+    return json.dumps(serialize(tr))
 
 if __name__ == "__main__":
     tr = Trie()
@@ -66,3 +75,7 @@ if __name__ == "__main__":
     data = serialize(tr)
     print(data)
     print(serialize(deserialize(data)))
+
+    str = to_json(tr)
+    print(str)
+    print(serialize(from_json(str)))
