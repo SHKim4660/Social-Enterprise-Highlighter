@@ -68,8 +68,8 @@ if __name__ == "__main__":
     tr.insert("as")
     tr.insert("각섬석")
     tr.insert("김병만")
-    print(tr.search("as"))
-    print(tr.search("asdf"))
+    print(tr.search("각석"))
+    print(tr.search("병만"))
     print(tr.search("a"))
 
     data = serialize(tr)

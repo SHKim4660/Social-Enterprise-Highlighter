@@ -56,7 +56,7 @@ document.querySelectorAll("div.name").forEach(
 
                     var vendor = response
                         .responseXML
-                        .querySelector("text__seller")
+                        .querySelector("span.text__seller")
                         .textContent;
 
                     if (!vendor) { return; };
