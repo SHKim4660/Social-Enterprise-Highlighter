@@ -64,21 +64,18 @@ def to_json(tr: Trie):
 if __name__ == "__main__":
     tr = Trie()
 
-    for i in range():
-        tr.insert()
+    tr.insert("asdf")
+    tr.insert("as")
+    tr.insert("각섬석")
+    tr.insert("김병만")
+    print(tr.search("각석"))
+    print(tr.search("병만"))
+    print(tr.search("a"))
 
-    # tr.insert("asdf")
-    # tr.insert("as")
-    # tr.insert("각섬석")
-    # tr.insert("김병만")
-    # print(tr.search("각석"))
-    # print(tr.search("병만"))
-    # print(tr.search("a"))
+    data = serialize(tr)
+    print(data)
+    print(serialize(deserialize(data)))
 
-    # data = serialize(tr)
-    # print(data)
-    # print(serialize(deserialize(data)))
-
-    # str = to_json(tr)
-    # print(str)
-    # print(serialize(from_json(str)))
+    str = to_json(tr)
+    print(str)
+    print(serialize(from_json(str)))
