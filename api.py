@@ -15,10 +15,11 @@ def userscript():
 
 @app.route('/api/<string:vendor>')
 def api(vendor):
-    if vendor == "건율상사":
-        return "YEP"
-    else:
-        return "NOP"
+    return "YEP"
+    # if vendor == "건율상사":
+    #     return "YEP"
+    # else:
+    #     return "NOP"
     
 if __name__ == "__main__":
     app.run(port=8081)
