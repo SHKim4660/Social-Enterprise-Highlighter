@@ -6,7 +6,6 @@ import re
 import trie
 
 app = Flask(__name__)
-tr = trie.Trie()
 
 @app.route('/userscript.user.js')
 def userscript():
@@ -21,11 +20,11 @@ def userscript():
 
 @app.route('/api/<string:vendor>')
 def api(vendor):
-    global tr
-    if tr.search(vendor) == True:
-        return "YEP"
-    else:
-        return "NOP"
+    return "YEP"
+    # if vendor == "건율상사":
+    #     return "YEP"
+    # else:
+    #     return "NOP"
     
 if __name__ == "__main__":
     app.run(port=8081)
