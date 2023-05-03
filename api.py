@@ -8,6 +8,15 @@ import trie
 app = Flask(__name__)
 tr = trie.Trie()
 
+def trie_insert(filename):
+    file = open(filename,'r')
+    reader = csv.reader(file)
+    for line in reader:
+        trie.Trie().insert(line)
+
+trie_insert("data\\pro_name_data.csv")
+trie_insert("data\\pro_KRE_data.csv")
+
 @app.route('/userscript.user.js')
 def userscript():
     str = ""
