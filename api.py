@@ -1,12 +1,28 @@
 from flask import Flask
+from typing import Dict, Union, Tuple, Any
+import json
+import csv
+import re
+import trie
+import os
 
 app = Flask(__name__)
+tr = trie.Trie()
+
+def trie_insert(filename):
+    file = open(filename,'r')
+    reader = csv.reader(file)
+    for line in reader:
+        tr.insert(line[0])
+
+trie_insert(os.path.join('data', 'pro_name_data'))
+trie_insert(os.path.join('data', 'pro_KRE_data.csv'))
 
 @app.route('/userscript.user.js')
 def userscript():
     str = ""
     try:
-        with open("gmarket_highlighter.user.js", "r") as f:
+        with open(os.path.join('gmarket_highlighter.user.js'), "r") as f:
             str = f.read()
     except Exception as e:
         print("Warning: Cannot read file.: ", e)
@@ -15,11 +31,12 @@ def userscript():
 
 @app.route('/api/<string:vendor>')
 def api(vendor):
-    return "YEP"
-    # if vendor == "건율상사":
-    #     return "YEP"
-    # else:
-    #     return "NOP"
+    global tr
+    print(vendor)
+    if tr.search(vendor) == True:
+        return "YEP"
+    else:
+        return "NOP"
     
 if __name__ == "__main__":
     app.run(port=8081)

@@ -2,6 +2,7 @@ import requests
 import json
 import csv
 import re
+import os
 
 # "사회적기업정보" , "\data\pro_name_data.csv"
 # "K-RE100참여기업" , "\data\pro_KRE_data.csv"
@@ -14,12 +15,12 @@ def pro_data(name):
     pro_data_list = []
 
     if name == "사회적기업정보":
-        filename = "data\\raw_name_data.csv"
-        target_file = "data\pro_name_data.csv"
+        filename = os.path.join('data', 'raw_name_data.csv')
+        target_file = os.path.join('data, pro_name_data.csv')
 
     if name == "K-RE100참여기업":
-        filename = "data\\raw_KRE_data.csv"
-        target_file = "data\pro_KRE_data.csv"
+        filename = os.path.join('data', 'raw_KRE_data.csv')
+        target_file = os.path.join('data', 'pro_KRE_data.csv')
 
     file = open(filename,'r')
     reader = csv.reader(file)

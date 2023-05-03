@@ -1,6 +1,7 @@
 import requests
 import json
 import csv
+import os
 
 # "사회적기업정보" , "\data\raw_name_data.csv"
 # "K-RE100참여기업" , "\data\raw_KRE_data.csv"
@@ -20,7 +21,7 @@ def get_data(dataname,page,perpage):
               pro_data = data.get("data")[i].get("entNmV")
               pro_data_list.append([pro_data])
               
-         save_data("data\\raw_name_data.csv",pro_data_list)
+         save_data(os.path.join('data', 'raw_name_data.csv'),pro_data_list)
          print(pro_data_list)
     
         if dataname == "K-RE100참여기업":
@@ -34,7 +35,7 @@ def get_data(dataname,page,perpage):
                pro_data = data.get("opentable").get("field")[i].get("ENTE_TERM")
                pro_data_list.append([pro_data])
 
-         save_data("data\\raw_KRE_data.csv",pro_data_list)
+         save_data(os.path.join('data', 'raw_KRE_data.csv'),pro_data_list)
          print(pro_data_list)
     except(IndexError,TypeError):pass
         
