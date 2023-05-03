@@ -12,7 +12,7 @@ def trie_insert(filename):
     file = open(filename,'r')
     reader = csv.reader(file)
     for line in reader:
-        trie.Trie().insert(line)
+        tr.insert(line[0])
 
 trie_insert("data\\pro_name_data.csv")
 trie_insert("data\\pro_KRE_data.csv")
@@ -31,6 +31,7 @@ def userscript():
 @app.route('/api/<string:vendor>')
 def api(vendor):
     global tr
+    print(vendor)
     if tr.search(vendor) == True:
         return "YEP"
     else:
