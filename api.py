@@ -6,7 +6,7 @@ app = Flask(__name__)
 def userscript():
     str = ""
     try:
-        with open("highlighter.user.js", "r") as f:
+        with open("gmarket_highlighter.user.js", "r") as f:
             str = f.read()
     except Exception as e:
         print("Warning: Cannot read file.: ", e)
