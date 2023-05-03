@@ -3,7 +3,7 @@ import json
 
 class Trie:
     def __init__(self):
-        self.chars: Dict[js, Trie] = {}
+        self.chars: Dict[str, Trie] = {}
         self.char = ""
 
     def insert(self, string: str):
@@ -31,7 +31,7 @@ class Trie:
 
 
 def serialize(tr: Trie):
-    dictionary: Dict[js, Trie] = tr.chars
+    dictionary: Dict[str, Trie] = tr.chars
     result: Any = {}
     for key in dictionary.keys():
         result[key] = serialize(dictionary[key])
@@ -62,10 +62,6 @@ def to_json(tr: Trie):
     return json.dumps(serialize(tr))
 
 if __name__ == "__main__":
-    import random
-    import time
-    import uuid
-    
     tr = Trie()
 
     tr.insert("asdf")
@@ -80,57 +76,6 @@ if __name__ == "__main__":
     print(data)
     print(serialize(deserialize(data)))
 
-    js = to_json(tr)
-    print(js)
-    print(serialize(from_json(js)))
-
-    benchmark_amount = 100000
-    data = []
-    for i in range(benchmark_amount):
-        data.append(str(uuid.uuid4()))
-
-    trie = Trie()
-    for string in data:
-        trie.insert(string)
-
-    query = data[:]
-    random.shuffle(query)
-
-    randomquery = []
-    for i in range(benchmark_amount):
-        randomquery.append(str(uuid.uuid4()))
-
-    print("벤치마크 1: 쿼리가 데이터에 있을때")
-    print("트라이 사용")
-    stime = time.time()
-    dummy = None
-    for q in query:
-        dummy = trie.search(q)
-    etime = time.time()
-
-    print(etime - stime, "초", dummy)
-    print("트라이 없이")
-    stime = time.time()
-    dummy = None
-    for q in query:
-        dummy = q in data
-
-    etime = time.time()
-    print(etime - stime, "초", dummy)
-
-    print("벤치마크 2: (대부분의) 쿼리가 데이터에 없을때")
-    print("트라이 사용")
-    stime = time.time()
-    dummy = None
-    for q in randomquery:
-        dummy = trie.search(q)
-    etime = time.time()
-    print(etime - stime, "초", dummy)
-
-    print("트라이 없이")
-    stime = time.time()
-    dummy = None
-    for q in randomquery:
-        dummy = q in data
-    etime = time.time()
-    print(etime - stime, "초", dummy)
+    str = to_json(tr)
+    print(str)
+    print(serialize(from_json(str)))
