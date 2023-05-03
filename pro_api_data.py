@@ -25,7 +25,7 @@ def pro_data(name):
     file = open(filename,'r')
     reader = csv.reader(file)
     for line in reader:
-        pro_data = re.sub(pattern=pattern, repl='', string= line[0]).replace("㈜","").replace("유)","").replace("주)","").replace("사)","").replace(" ","").replace("주식회사","").replace("사단법인","")
+        pro_data = re.sub(pattern=pattern, repl='', string= line[0]).replace("㈜","").replace("유)","").replace("주)","").replace("사)","")
         pro_data_list.append([pro_data])
     
     save_data(target_file,pro_data_list)
