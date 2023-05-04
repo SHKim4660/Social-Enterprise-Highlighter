@@ -31,8 +31,9 @@ def userscript():
 @app.route('/api/<string:vendor>')
 def api(vendor):
     global tr
-    print(vendor)
-    if tr.search(vendor) == True:
+    pattern = r'\([^)]*\)'
+    pro_vendor = re.sub(pattern=pattern, repl='', string= vendor).replace("㈜","").replace("유)","").replace("주)","").replace("사)","").replace(" ","").replace("주식회사","").replace("사단법인","")
+    if tr.search(pro_vendor) == True:
         return "YEP"
     else:
         return "NOP"
