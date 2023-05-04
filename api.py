@@ -14,8 +14,9 @@ def trie_insert(filename):
     reader = csv.reader(file)
     for line in reader:
         tr.insert(line[0])
+    file.close()
 
-trie_insert(os.path.join('data', 'pro_name_data'))
+trie_insert(os.path.join('data', 'pro_name_data.csv'))
 trie_insert(os.path.join('data', 'pro_KRE_data.csv'))
 
 @app.route('/userscript.user.js')
