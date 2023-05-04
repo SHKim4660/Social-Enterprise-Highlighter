@@ -4,6 +4,7 @@ import json
 import csv
 import re
 import trie
+import os
 
 app = Flask(__name__)
 tr = trie.Trie()
@@ -14,14 +15,14 @@ def trie_insert(filename):
     for line in reader:
         tr.insert(line[0])
 
-trie_insert("data\\pro_name_data.csv")
-trie_insert("data\\pro_KRE_data.csv")
+trie_insert(os.path.join('data', 'pro_name_data'))
+trie_insert(os.path.join('data', 'pro_KRE_data.csv'))
 
 @app.route('/userscript.user.js')
 def userscript():
     str = ""
     try:
-        with open("highlighter.user.js", "r") as f:
+        with open(os.path.join('gmarket_highlighter.user.js'), "r") as f:
             str = f.read()
     except Exception as e:
         print("Warning: Cannot read file.: ", e)
