@@ -4,10 +4,12 @@ import json
 import csv
 import re
 import trie
+import suffixtree
 import os
 
 app = Flask(__name__)
 tr = trie.Trie()
+st = suffixtree.SFXTree()
 
 def trie_insert(filename):
     file = open(filename,'r')
