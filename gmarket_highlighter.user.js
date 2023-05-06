@@ -14,12 +14,10 @@ function modifydiv(name, vendor) {
 
     var h1 = document.createElement("h1");
     h1.innerText = `(${vendor})`;
-    // name.appendChild(h1);
 
     var hover = document.createElement("div");
     hover.innerText = vendor;
     hover.className = "socihihover";
-    // hover.style.display = none;
     name.appendChild(hover);
 }
 
@@ -42,10 +40,6 @@ div.box__item-title:hover > .socihihover {
 
 document.querySelectorAll("div.box__item-title").forEach(
     (name) => {
-        var img = document.createElement("img");
-        img.src = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.89XIMHLxI2RmF_M_QST1EwHaD4%26pid%3DApi&f=1&ipt=d52dd821ad764f8cd60fe165d1747a337e783625084c808026948c37b669dd4a&ipo=images";
-        img.alt = "asdf";
-        // name.prepend(img)
 
         var link = name.querySelector("a.link__item").href
 

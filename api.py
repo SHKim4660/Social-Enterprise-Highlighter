@@ -6,6 +6,7 @@ import re
 import trie
 import suffixtree
 import os
+import sys
 
 app = Flask(__name__)
 tr = trie.Trie()
@@ -28,7 +29,7 @@ def userscript():
         with open(os.path.join('gmarket_highlighter.user.js'), "r") as f:
             str = f.read()
     except Exception as e:
-        print("Warning: Cannot read file.: ", e)
+        sys.stderr.write(f"Warning: Cannot read userscript file.: ", e)
 
     return str
 
@@ -37,8 +38,7 @@ def api(vendor):
     global tr
     pattern = r'\([^)]*\)'
     pro_vendor = re.sub(pattern=pattern, repl='', string= vendor).replace("㈜","").replace("유)","").replace("주)","").replace("사)","").replace(" ","").replace("주식회사","").replace("사단법인","")
-    print(pro_vendor)
-    if tr.search(pro_vendor) == True:
+    if tr.search(pro_vendor):
         return "YEP"
     else:
         return "NOP"

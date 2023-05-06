@@ -1,12 +1,14 @@
 from typing import Dict, Union, Tuple, Any
 import json
 
+str_ = str
+
 class Trie:
     def __init__(self):
         self.chars: Dict[str, Trie] = {}
-        self.char = ""
+        self.char: str = ""
 
-    def insert(self, string: str):
+    def insert(self, string: str_) -> None:
         if len(string) >= 2:
             if string[0] not in self.chars.keys():
                 self.chars[string[0]] = Trie()
@@ -15,7 +17,7 @@ class Trie:
         else:
             self.char = string
 
-    def search(self, string: str) -> bool:
+    def search(self, string: str_) -> bool:
         if len(string) >= 2:
             if string[0] not in self.chars.keys():
                 return False
@@ -31,7 +33,7 @@ class Trie:
 
 
 def serialize(tr: Trie):
-    dictionary: Dict[str, Trie] = tr.chars
+    dictionary: Dict[str_, Trie] = tr.chars
     result: Any = {}
     for key in dictionary.keys():
         result[key] = serialize(dictionary[key])
@@ -41,7 +43,7 @@ def serialize(tr: Trie):
     
     return result
 
-def deserialize(data):
+def deserialize(data: Any):
     dict = data
     result = Trie()
     
@@ -54,8 +56,8 @@ def deserialize(data):
 
     return result
         
-def from_json(dump: str):
-    data = json.loads(dump)
+def from_json(dump: str_):
+    data: Any = json.loads(dump)
     return deserialize(data)
 
 def to_json(tr: Trie):
