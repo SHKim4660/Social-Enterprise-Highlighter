@@ -10,17 +10,20 @@
 // ==/UserScript==
 
 function modifydiv(name, vendor) {
+    // 제목 백그라운드 색상
     name.style.backgroundColor = "#00ffff";
 
     var h1 = document.createElement("h1");
     h1.innerText = `(${vendor})`;
 
+    // 호버 창
     var hover = document.createElement("div");
     hover.innerText = vendor;
     hover.className = "socihihover";
     name.appendChild(hover);
 }
 
+// 호버 창 CSS
 GM_addStyle(`
 .socihihover {
   visibility: hidden;
@@ -40,16 +43,19 @@ div.box__item-title:hover > .socihihover {
 
 document.querySelectorAll("div.box__item-title").forEach(
     (name) => {
-
+        // 상품 링크
         var link = name.querySelector("a.link__item").href
 
+        // 상품 링크로 http 리퀘스트 전송
         GM_xmlhttpRequest(
             {
                 url: link,
                 method: "GET",
                 onload: (response) => {
+                    // 에러시 스킵
                     if (response.status != 200) { return };
 
+                    // 브랜드명 선택
                     var vendorspan = response
                         .responseXML
                         .querySelector("span.text__brand>span.text")
@@ -61,6 +67,7 @@ document.querySelectorAll("div.box__item-title").forEach(
                     console.log(vendor);
 
                     var is_social = false;
+                    // api 리퀘스트 전송
                     GM_xmlhttpRequest(
                         {
                             url:
@@ -68,6 +75,7 @@ document.querySelectorAll("div.box__item-title").forEach(
                             method: "GET",
                             onload: (response) => {
                                 if (response.status != 200) { return; };
+                                // response == "YEP" 이면 사회적 기업임
                                 is_social =
                                     response.responseText == "YEP";
 

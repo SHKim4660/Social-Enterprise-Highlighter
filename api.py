@@ -22,6 +22,7 @@ def trie_insert(filename):
 trie_insert(os.path.join('data', 'pro_name_data.csv'))
 trie_insert(os.path.join('data', 'pro_KRE_data.csv'))
 
+# 유저스크립트 제공
 @app.route('/userscript.user.js')
 def userscript():
     str = ""
@@ -33,11 +34,14 @@ def userscript():
 
     return str
 
+# api 제공
 @app.route('/api/<string:vendor>')
 def api(vendor):
     global tr
+    # cleaning
     pattern = r'\([^)]*\)'
     pro_vendor = re.sub(pattern=pattern, repl='', string= vendor).replace("㈜","").replace("유)","").replace("주)","").replace("사)","").replace(" ","").replace("주식회사","").replace("사단법인","")
+    # 트라이에 있으면
     if tr.search(pro_vendor):
         return "YEP"
     else:
