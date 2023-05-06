@@ -9,12 +9,12 @@ class SFXTree:
             self.tr.insert(suffix)
 
     def search(self, query: str) -> bool:
-        return self.tr.search(query, match_prefix=True)
+        return self.tr.search(query)#, match_prefix=True)
 
 if __name__ == "__main__":
     st = SFXTree()
 
     st.insert('abcdefg')
 
-    print(st.search("bc"))
+    print(st.search("abcdefg"))
     print(st.search("ag"))
