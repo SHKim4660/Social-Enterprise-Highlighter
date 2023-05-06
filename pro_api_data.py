@@ -10,11 +10,10 @@ import os
 pattern = r'\([^)]*\)'
 pro_data_list = []
 
-# (주),(유) 등 필요 없는거 날리기
 def pro_data(name):
     pro_data_list = []
 
-    if name == "사회적기업정보":
+    if name == "사회적기업정보":                                    # 파일 불러오기
         filename = os.path.join('data', 'raw_name_data.csv')
         target_file = os.path.join('data', 'pro_name_data.csv')
 
@@ -22,13 +21,13 @@ def pro_data(name):
         filename = os.path.join('data', 'raw_KRE_data.csv')
         target_file = os.path.join('data', 'pro_KRE_data.csv')
 
-    file = open(filename,'r')
-    reader = csv.reader(file)
+    file = open(filename,'r') 
+    reader = csv.reader(file)                           # (주),(유) 등 필요없는 항목 제거
     for line in reader:
         pro_data = re.sub(pattern=pattern, repl='', string= line[0]).replace("㈜","").replace("유)","").replace("주)","").replace("사)","").replace(" ","").replace("주식회사","").replace("사단법인","")
         pro_data_list.append([pro_data])
     
-    save_data(target_file,pro_data_list)
+    save_data(target_file,pro_data_list)          # 저장
     print(pro_data_list)
 
         
