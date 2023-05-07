@@ -15,19 +15,16 @@ class Trie:
         else:
             self.char = string
 
-    def search(self, string: str) -> bool:
+    def search(self, string: str, match_prefix=False) -> bool:
         if len(string) >= 2:
             if string[0] not in self.chars.keys():
                 return False
 
-            return self.chars[string[0]].search(string[1:])
+            return self.chars[string[0]].search(string[1:], match_prefix)
 
         else:
-            if string == self.char:
-                return True
-
-            else:
-                return False
+            return string == self.char or \
+                (string in self.chars.keys() and match_prefix)
 
 
 def serialize(tr: Trie):
@@ -65,12 +62,14 @@ if __name__ == "__main__":
     tr = Trie()
 
     tr.insert("asdf")
+    tr.insert("g")
     tr.insert("as")
     tr.insert("각섬석")
     tr.insert("김병만")
-    print(tr.search("각석"))
+    print(tr.search("각섬"))
     print(tr.search("병만"))
-    print(tr.search("a"))
+    print(tr.search("asdf"))
+    print(tr.search("a", match_prefix=True))
 
     data = serialize(tr)
     print(data)
