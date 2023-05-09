@@ -21,7 +21,7 @@ class Trie:
             # 문자열 종결
             self.char = string
 
-    def search(self, string: str_) -> bool:
+    def search(self, string: str, match_prefix=False) -> bool:
         # 두 자 이상
         if len(string) >= 2:
             # 자식 노드 중 없으면 아님
@@ -29,11 +29,12 @@ class Trie:
                 return False
 
             # 재귀 호출
-            return self.chars[string[0]].search(string[1:])
+            return self.chars[string[0]].search(string[1:], match_prefix)
 
         else:
             # 말단
-            return string == self.char
+            return string == self.char or \
+                (string in self.chars.keys() and match_prefix) # match_prefix 인 경우만 해당 조건 고려
 
 
 # 직렬화 포맷: [self.char, self.chars]
@@ -80,12 +81,14 @@ if __name__ == "__main__":
     tr = Trie()
 
     tr.insert("asdf")
+    tr.insert("g")
     tr.insert("as")
     tr.insert("각섬석")
     tr.insert("김병만")
-    print(tr.search("각석"))
+    print(tr.search("각섬"))
     print(tr.search("병만"))
-    print(tr.search("a"))
+    print(tr.search("asdf"))
+    print(tr.search("a", match_prefix=True))
 
     data = serialize(tr)
     print(data)
