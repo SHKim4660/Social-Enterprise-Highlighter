@@ -8,10 +8,12 @@ import suffixtree
 import os
 import sys
 
+# 객체 초기화
 app = Flask(__name__)
 tr = trie.Trie()
 st = suffixtree.SFXTree()
 
+# 트라이 초기화 함수
 def trie_insert(filename):
     file = open(filename,'r')
     reader = csv.reader(file)
@@ -19,6 +21,7 @@ def trie_insert(filename):
         tr.insert(line[0])
     file.close()
 
+# 트라이에 데이터 삽입
 trie_insert(os.path.join('data', 'pro_name_data.csv'))
 trie_insert(os.path.join('data', 'pro_KRE_data.csv'))
 
