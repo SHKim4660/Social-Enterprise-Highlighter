@@ -4,14 +4,12 @@ import json
 import csv
 import re
 import trie
-import suffixtree
 import os
 import sys
 
 # 객체 초기화
 app = Flask(__name__)
 tr = trie.Trie()
-st = suffixtree.SFXTree()
 
 # 트라이 초기화 함수
 def trie_insert(filename):
@@ -52,3 +50,14 @@ def api(vendor):
     
 if __name__ == "__main__":
     app.run(port=8081)
+
+
+
+
+
+
+
+
+
+
+

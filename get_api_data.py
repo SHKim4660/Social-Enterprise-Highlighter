@@ -8,7 +8,7 @@ import os
 
 pro_data_list = []
 
-#데이터 받아오기
+#data.kr에서 api 데이터 받아오기
 def get_data(dataname,page,perpage):
     pro_data_list = []
     try:
@@ -41,7 +41,7 @@ def save_data(filename,index):
     writer = csv.writer(file)
     writer.writerows(index)
 
-#Ge Data
+#실행 코드
 print("-------------------------사회적기업정보-------------------------")
 for i in range(3300):
     get_data("사회적기업정보",i,1)

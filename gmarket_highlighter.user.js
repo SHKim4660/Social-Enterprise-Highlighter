@@ -90,3 +90,13 @@ document.querySelectorAll("div.box__item-title").forEach(
             });
     }
 );
+
+
+
+
+
+
+
+
+
+
