@@ -20,12 +20,12 @@ def pro_data(name):
         target_file = os.path.join('data', 'pro_KRE_data.csv')
 
     file = open(filename,'r') 
-    reader = csv.reader(file)                           # 데이터 전처리 (기업명에 포함된 '주식회사',(주),(유)등을 제거)
+    reader = csv.reader(file)                           # 데이터 처리 (기업명에 포함된 '주식회사',(주),(유)등을 제거)
     for line in reader:
         pro_data = re.sub(pattern=pattern, repl='', string= line[0]).replace("㈜","").replace("유)","").replace("주)","").replace("사)","").replace(" ","").replace("주식회사","").replace("사단법인","")
         pro_data_list.append([pro_data])
     
-    save_data(target_file,pro_data_list)          # 전처리된 데이터 저장
+    save_data(target_file,pro_data_list)          # 처리된 데이터 저장
     print(pro_data_list)
 
         
