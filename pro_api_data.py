@@ -14,7 +14,7 @@ def pro_data(name):
     if name == "사회적기업정보":                                    #api로 받아온 데이터가 저장된 파일 불러오기
         filename = os.path.join('data', 'raw_name_data.csv')
         target_file = os.path.join('data', 'pro_name_data.csv')
-
+    
     if name == "K-RE100참여기업":
         filename = os.path.join('data', 'raw_KRE_data.csv')
         target_file = os.path.join('data', 'pro_KRE_data.csv')
