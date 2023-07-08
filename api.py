@@ -20,8 +20,9 @@ def trie_insert(filename):
     file.close()
 
 # 트라이에 데이터 삽입
-trie_insert(os.path.join('data', 'pro_name_data.csv'))
-trie_insert(os.path.join('data', 'pro_KRE_data.csv'))
+trie_insert(os.path.join('data', 'data.csv'))
+# trie_insert(os.path.join('data', 'pro_name_data.csv'))
+# trie_insert(os.path.join('data', 'pro_KRE_data.csv'))
 
 # 유저스크립트 제공
 @app.route('/userscript.user.js')
