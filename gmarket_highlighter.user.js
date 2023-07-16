@@ -76,12 +76,11 @@ document.querySelectorAll("div.box__item-title").forEach(
                             onload: (response) => {
                                 if (response.status != 200) { return; };
                                 // response == "YEP" 이면 사회적 기업임
-                                is_social =
-                                    response.responseText == "YEP";
+                                is_social = response.responseText;
 
                                 console.log(is_social);
                                 if (is_social) {
-                                    modifydiv(name, vendor);
+                                    modifydiv(name, response.responseText);
                                 }
                             }
                         }

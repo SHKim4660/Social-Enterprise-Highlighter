@@ -44,21 +44,13 @@ def api(vendor):
     pattern = r'\([^)]*\)'
     pro_vendor = re.sub(pattern=pattern, repl='', string= vendor).replace("㈜","").replace("유)","").replace("주)","").replace("사)","").replace(" ","").replace("주식회사","").replace("사단법인","")
     # 트라이에 있으면
-    if tr.search(pro_vendor):
-        return "YEP"
-    else:
+    serch = tr.search(pro_vendor)
+    if serch:
+        return serch
+    if serch == False:
         return "NOP"
     
 if __name__ == "__main__":
     app.run(port=8081)
-
-
-
-
-
-
-
-
-
 
 
