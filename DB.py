@@ -16,7 +16,8 @@ def get_data(name,page,perpage):
             for i in range(perpage):
                  raw_data = api_data.get("data")[i].get("entNmV")  # 데이터를 받아와서 리스트 형태로 취합
                  pro_data = re.sub(pattern=pattern, repl='', string= raw_data).replace("㈜","").replace("유)","").replace("주)","").replace("사)","").replace(" ","").replace("주식회사","").replace("사단법인","")
-                 data_list.append([pro_data])
+                 pro_pro_data = f"{pro_data}     한국사회적기업 진흥원 선정"
+                 data_list.append([pro_pro_data])
               
             save_data(os.path.join('data', 'data.csv'),data_list) # 데이터를 csv파일 평태로 저장
             print(data_list)
@@ -41,6 +42,7 @@ def save_data(filename,index):
     file = open(filename,'a',newline='')
     writer = csv.writer(file)
     writer.writerows(index)
+
 
 #실행 코드
 print("-------------------------사회적기업정보-------------------------")
