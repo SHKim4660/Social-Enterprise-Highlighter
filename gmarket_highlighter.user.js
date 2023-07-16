@@ -68,15 +68,18 @@ document.querySelectorAll("div.box__item-title").forEach(
 
                     var is_social = false;
                     // api 리퀘스트 전송
+                    var num = 7
+
                     GM_xmlhttpRequest(
                         {
                             url:
-                                `http://localhost:8081/api/${vendor}`,
+                                `http://localhost:8081/api/${vendor+num}`,
                             method: "GET",
                             onload: (response) => {
                                 if (response.status != 200) { return; };
                                 // response == "YEP" 이면 사회적 기업임
-                                is_social = response.responseText;
+                                is_social =
+                                    response.responseText// == "YEP"; // 여기서 Ture False 판단함
 
                                 console.log(is_social);
                                 if (is_social) {
