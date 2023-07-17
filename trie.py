@@ -28,6 +28,8 @@ class Trie:
         if len(string) >= 2:
             # 자식 노드 중 없으면 아님
             if string[0] not in self.chars.keys():
+                return None
+
             # 재귀 호출
             return self.chars[string[0]].search(string[1:], match_prefix)
 
@@ -40,7 +42,7 @@ class Trie:
                 return None
 
 
-# 직렬화 포맷: [self.char, self.chars]
+# 직렬화 포맷: [self.char, self.data, self.chars]
 
 # 직렬화
 def serialize(tr: Trie):
@@ -51,7 +53,7 @@ def serialize(tr: Trie):
         result[key] = serialize(dictionary[key])
 
     if tr.char != "":
-        return [tr.char, result]
+        return [tr.char, tr.data, result]
     
     return result
 
@@ -63,7 +65,8 @@ def deserialize(data: Any):
     # 노드이면
     if type(data) == list:
         result.char = data[0]
-        dict = data[1]
+        result.data = data[1]
+        dict = data[2]
 
     # 자식 노드 복원
     for key in dict.keys():

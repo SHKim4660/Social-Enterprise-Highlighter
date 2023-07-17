@@ -17,8 +17,10 @@ def trie_insert(filename):
     reader = csv.reader(file)
     for line in reader:
         # TODO
-        name = line[0].split('0')[0]
-        tr.insert(name, "job")
+        name = line[0][:-1]
+        job = "K-RE100 참여기업" if line[0][-1] else "한국사회적기업진흥원 선정" 
+
+        tr.insert(name, job)
     file.close()
 
 # 트라이에 데이터 삽입
