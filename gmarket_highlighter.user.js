@@ -9,16 +9,16 @@
 // @description 2023. 3. 26. 오후 3:47:01
 // ==/UserScript==
 
-function modifydiv(name, vendor) {
+function modifydiv(name, vendor, job) {
     // 제목 백그라운드 색상
     name.style.backgroundColor = "#00ffff";
 
     var h1 = document.createElement("h1");
-    h1.innerText = `(${vendor})`;
+    h1.innerText = `${vendor}(${job})`;
 
     // 호버 창
     var hover = document.createElement("div");
-    hover.innerText = vendor;
+    hover.innerText = `${vendor}(${job})`;
     hover.className = "socihihover";
     name.appendChild(hover);
 }
@@ -68,23 +68,20 @@ document.querySelectorAll("div.box__item-title").forEach(
 
                     var is_social = false;
                     // api 리퀘스트 전송
-                    var num = 7
 
                     GM_xmlhttpRequest(
                         {
                             url:
-                                `http://localhost:8081/api/${vendor+num}`,
+                                `http://localhost:8081/api/${vendor}`,
                             method: "GET",
                             onload: (response) => {
                                 if (response.status != 200) { return; };
-                                // response == "YEP" 이면 사회적 기업임
-                                is_social =
+                                // response.status == 200이면 사회적 기업임
+                                job =
                                     response.responseText// == "YEP"; // 여기서 Ture False 판단함
 
-                                console.log(is_social);
-                                if (is_social) {
-                                    modifydiv(name, response.responseText);
-                                }
+                                console.log(job);
+                                modifydiv(name, vendor, response.responseText);
                             }
                         }
                     );
