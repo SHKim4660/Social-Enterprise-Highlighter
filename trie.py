@@ -26,10 +26,10 @@ class Trie:
         if len(string) >= 2:
             # 자식 노드 중 없으면 아님
             if string[0] not in self.chars.keys():
-                if string[0] == "0":
+                if self.chars.keys() == "0":
                     pro_string = f"{string}      한국사회적기업 진흥원 선정"
                     return pro_string
-                if string[0] == "1":
+                elif self.chars.keys() == "1":
                     pro_string = f"{string}      K-RE100 참여기업"
                     return pro_string
                 else:return False

@@ -68,12 +68,12 @@ document.querySelectorAll("div.box__item-title").forEach(
 
                     var is_social = false;
                     // api 리퀘스트 전송
-                    var num = 7
+                    
 
                     GM_xmlhttpRequest(
                         {
                             url:
-                                `http://localhost:8081/api/${vendor+num}`,
+                                `http://localhost:8081/api/${vendor}`,
                             method: "GET",
                             onload: (response) => {
                                 if (response.status != 200) { return; };
