@@ -13,7 +13,7 @@ tr = trie.Trie()
 
 # 트라이 초기화 함수
 def trie_insert(filename):
-    file = open(filename,'r')
+    file = open(filename,'r',encoding = 'utf8')
     reader = csv.reader(file)
     for line in reader:
         tr.insert(line[0])
@@ -43,22 +43,15 @@ def api(vendor):
     # cleaning
     pattern = r'\([^)]*\)'
     pro_vendor = re.sub(pattern=pattern, repl='', string= vendor).replace("㈜","").replace("유)","").replace("주)","").replace("사)","").replace(" ","").replace("주식회사","").replace("사단법인","")
+    pro_pro_vendor = f"{pro_vendor}7"
     # 트라이에 있으면
-    if tr.search(pro_vendor):
-        return "YEP"
-    else:
+    serch = tr.search(pro_pro_vendor)
+    if serch:
+        return serch
+    if serch == False:
         return "NOP"
     
 if __name__ == "__main__":
     app.run(port=8081)
-
-
-
-
-
-
-
-
-
 
 
