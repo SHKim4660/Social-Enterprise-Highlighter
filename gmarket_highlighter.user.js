@@ -11,7 +11,11 @@
 
 function modifydiv(name, vendor, job) {
     // 제목 백그라운드 색상
-    name.style.backgroundColor = "#00ffff";
+    name.style.backgroundColor = "#00FFFF";
+    name.style.display = "inline-block";
+    name.style.padding = "5px";
+    // name.style.backgroundClip = "content-box"
+    name.style.borderRadius = "6px"
 
     var h1 = document.createElement("h1");
     h1.innerText = `${vendor}(${job})`;
@@ -20,23 +24,28 @@ function modifydiv(name, vendor, job) {
     var hover = document.createElement("div");
     hover.innerText = `${vendor}(${job})`;
     hover.className = "socihihover";
-    name.appendChild(hover);
+    name.parentNode.insertBefore(hover, name.nextSibling);
 }
 
 // 호버 창 CSS
 GM_addStyle(`
 .socihihover {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+
   visibility: hidden;
-  width: 120px;
   background-color: black;
-  color: #fff;
-  text-align: center;
-  padding: 5px 0;
+  font-size: 16px;
+  color: white;
+  padding: 7px;
   border-radius: 6px;
-  height: 0px;
+  z-index: 9999;
+  position: absolute;
 }
 
-div.box__item-title:hover > .socihihover {
+div.box__item-title:hover ~ .socihihover {
   visibility: visible;
   height: 30px;
 }`);
