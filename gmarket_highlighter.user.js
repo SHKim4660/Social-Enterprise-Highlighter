@@ -11,11 +11,7 @@
 
 function modifydiv(name, vendor, job) {
     // 제목 백그라운드 색상
-    name.style.backgroundColor = "#00FFFF";
-    name.style.display = "inline-block";
-    name.style.padding = "5px";
-    // name.style.backgroundClip = "content-box"
-    name.style.borderRadius = "6px"
+    name.classList.add("socihihighlight")
 
     var h1 = document.createElement("h1");
     h1.innerText = `${vendor}(${job})`;
@@ -36,7 +32,7 @@ GM_addStyle(`
   flex-direction: column;
 
   visibility: hidden;
-  background-color: black;
+  background-color: #7D19FA;
   font-size: 16px;
   color: white;
   padding: 7px;
@@ -48,6 +44,20 @@ GM_addStyle(`
 div.box__item-title:hover ~ .socihihover {
   visibility: visible;
   height: 30px;
+}
+
+.socihihighlight {
+  background-color: transparent;
+  display: inline-block;
+  background-image: linear-gradient(
+  to right,
+  rgba(251, 247, 25, 0.1),
+  rgba(251, 247, 25, 0.7) 4%,
+  rgba(251, 247, 25, 0.3)
+  );
+  margin: 0 -0.4em;
+  padding: 0.1em 0.4em;
+  border-radius: 0.8em 0.3em;
 }`);
 
 document.querySelectorAll("div.box__item-title").forEach(
