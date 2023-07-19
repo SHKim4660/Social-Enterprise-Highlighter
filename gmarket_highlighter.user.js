@@ -15,11 +15,11 @@ function modifydiv(name, vendor, job) {
     // 제목 백그라운드 색상
     name.classList.add("socihihighlight")
 
-    var h1 = document.createElement("h1");
+    let h1 = document.createElement("h1");
     h1.innerText = `${vendor}(${job})`;
 
     // 호버 창
-    var hover = document.createElement("div");
+    let hover = document.createElement("div");
     hover.innerText = `${vendor}(${job})`;
     hover.className = "socihihover";
     name.parentNode.insertBefore(hover, name.nextSibling);
@@ -33,7 +33,7 @@ function getStyle() {
             onload: (response) => {
                 if (response.status != 200) { return };
 
-                var css = response.responseText;
+                let css = response.responseText;
                 GM_addStyle(css);
             }
         }
@@ -46,7 +46,7 @@ getStyle();
 document.querySelectorAll("div.box__item-title").forEach(
     (name) => {
         // 상품 링크
-        var link = name.querySelector("a.link__item").href
+        let link = name.querySelector("a.link__item").href
 
         // 상품 링크로 http 리퀘스트 전송
         GM_xmlhttpRequest(
@@ -58,17 +58,17 @@ document.querySelectorAll("div.box__item-title").forEach(
                     if (response.status != 200) { return };
 
                     // 브랜드명 선택
-                    var vendorspan = response
+                    let vendorspan = response
                         .responseXML
                         .querySelector("span.text__brand>span.text")
 
                     if (!vendorspan) { return; };
 
-                    var vendor = vendorspan.textContent
+                    let vendor = vendorspan.textContent
 
                     console.log(vendor);
 
-                    var is_social = false;
+                    let is_social = false;
                     // api 리퀘스트 전송
                     GM_xmlhttpRequest(
                         {
