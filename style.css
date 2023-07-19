@@ -1,0 +1,34 @@
+.socihihover {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+
+  visibility: hidden;
+  background-color: #7D19FA;
+  font-size: 16px;
+  color: white;
+  padding: 7px;
+  border-radius: 6px;
+  z-index: 9999;
+  position: absolute;
+}
+
+div.box__item-title:hover ~ .socihihover {
+  visibility: visible;
+  height: 30px;
+}
+
+.socihihighlight {
+  background-color: transparent;
+  display: inline-block;
+  background-image: linear-gradient(
+  to right,
+  rgba(251, 247, 25, 0.1),
+  rgba(251, 247, 25, 0.7) 4%,
+  rgba(251, 247, 25, 0.3)
+  );
+  margin: 0 -0.4em;
+  padding: 0.1em 0.4em;
+  border-radius: 0.8em 0.3em;
+}

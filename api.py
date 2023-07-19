@@ -7,6 +7,16 @@ import trie
 import os
 import sys
 
+def get_file_or_empty(filename: str):
+    string = ""
+    try:
+        with open(os.path.join(filename), "r") as f:
+            string = f.read()
+    except Exception as e:
+        sys.stderr.write(f"Error: Cannot read the file, {filename}.: {e}")
+
+    return string
+
 # 객체 초기화
 app = Flask(__name__)
 tr = trie.Trie()
@@ -31,14 +41,7 @@ trie_insert(os.path.join('data', 'data.csv'))
 # 유저스크립트 제공
 @app.route('/userscript.user.js')
 def userscript():
-    str = ""
-    try:
-        with open(os.path.join('gmarket_highlighter.user.js'), "r") as f:
-            str = f.read()
-    except Exception as e:
-        sys.stderr.write(f"Warning: Cannot read userscript file.: ", e)
-
-    return str
+    return get_file_or_empty("gmarket_highlighter.user.js")
 
 # api 제공
 @app.route('/api/<string:vendor>')
@@ -54,6 +57,10 @@ def api(vendor):
         return serch, 200
     else:
         return "NOP", 404
+
+@app.route('/style.css')
+def css():
+    return get_file_or_empty("style.css")
     
 if __name__ == "__main__":
     app.run(port=8081)

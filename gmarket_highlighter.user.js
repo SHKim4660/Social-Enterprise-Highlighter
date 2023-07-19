@@ -2,8 +2,10 @@
 // @name        Social Enterprise Highlighter - gmarket.com
 // @namespace   Violentmonkey Scripts
 // @match       https://browse.gmarket.co.kr/search
+// @resource    myStyle http://127.0.0.1:8081/style.css
 // @grant       GM_xmlhttpRequest
 // @grant       GM_addStyle
+// @grant       GM_getResourceText
 // @version     1.0.1
 // @author      hyc3573
 // @description 2023. 3. 26. 오후 3:47:01
@@ -23,42 +25,23 @@ function modifydiv(name, vendor, job) {
     name.parentNode.insertBefore(hover, name.nextSibling);
 }
 
-// 호버 창 CSS
-GM_addStyle(`
-.socihihover {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  flex-direction: column;
+function getStyle() {
+    GM_xmlhttpRequest(
+        {
+            url: "http://127.0.0.1:8081/style.css",
+            method: "GET",
+            onload: (response) => {
+                if (response.status != 200) { return };
 
-  visibility: hidden;
-  background-color: #7D19FA;
-  font-size: 16px;
-  color: white;
-  padding: 7px;
-  border-radius: 6px;
-  z-index: 9999;
-  position: absolute;
+                var css = response.responseText;
+                GM_addStyle(css);
+            }
+        }
+    )
 }
 
-div.box__item-title:hover ~ .socihihover {
-  visibility: visible;
-  height: 30px;
-}
-
-.socihihighlight {
-  background-color: transparent;
-  display: inline-block;
-  background-image: linear-gradient(
-  to right,
-  rgba(251, 247, 25, 0.1),
-  rgba(251, 247, 25, 0.7) 4%,
-  rgba(251, 247, 25, 0.3)
-  );
-  margin: 0 -0.4em;
-  padding: 0.1em 0.4em;
-  border-radius: 0.8em 0.3em;
-}`);
+// GM_addStyle(GM_getResourceText('myStyle'));
+getStyle();
 
 document.querySelectorAll("div.box__item-title").forEach(
     (name) => {
@@ -108,12 +91,6 @@ document.querySelectorAll("div.box__item-title").forEach(
     }
 );
 
-
-
-
-
-
-
-
-
-
+setInterval(function() {
+    getStyle();
+}, 1000)
