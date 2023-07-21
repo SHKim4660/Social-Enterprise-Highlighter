@@ -27,7 +27,7 @@ function modifydiv(name, vendor, job) {
 function getStyle() {
     GM_xmlhttpRequest(
         {
-            url: "http://127.0.0.1:5000/style.css",
+            url: "http://$HOST/style.css",
             method: "GET",
             onload: (response) => {
                 if (response.status != 200) { return };
@@ -72,7 +72,7 @@ if (window.location.href.split("/")[2].split(".")[0] === "browse") {
                         GM_xmlhttpRequest(
                             {
                                 url:
-                                    `http://localhost:5000/api/${vendor}`,
+                                    `http://$HOST/api/${vendor}`,
                                 method: "GET",
                                 onload: (response) => {
                                     if (response.status != 200) { return; };
@@ -93,7 +93,7 @@ if (window.location.href.split("/")[2].split(".")[0] === "browse") {
     let vendor = document.querySelector("span.text__brand>span.text").textContent;
     GM_xmlhttpRequest(
         {
-            url: `http://localhost:5000/track/${vendor}`,
+            url: `http://$HOST/track/${vendor}`,
             method: "POST"
         }
     )

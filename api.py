@@ -8,6 +8,8 @@ import os
 import sys
 import datetime
 
+hostname = "127.0.0.1:5000"
+
 def get_file_or_empty(filename: str):
     string = ""
     try:
@@ -42,7 +44,7 @@ trie_insert(os.path.join('data', 'data.csv'))
 # 유저스크립트 제공
 @app.route('/userscript.user.js')
 def userscript():
-    return get_file_or_empty("gmarket_highlighter.user.js")
+    return get_file_or_empty("gmarket_highlighter.user.js").replace("$HOST", )
 
 # api 제공
 @app.route('/api/<string:vendor>')
@@ -82,6 +84,8 @@ def track(vendor):
     return "Success!", 200
     
 if __name__ == "__main__":
+    if len(sys.argv) >= 2:
+        hostname = sys.argv[1]
+    
     app.run(port=5000)
-
 
