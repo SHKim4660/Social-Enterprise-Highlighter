@@ -11,6 +11,8 @@ Social Enterprise Highlighter (SEH)
 ## 테스트 방법
 1. [violentmonkey](---) 설치
 
-2. 새 스크립트 만들기 (+ 모양 아이콘) 클릭
-3. highlighter.js 복붙
-4. 저장
+2. `python api.py 127.0.0.1:5000`
+
+3. 127.0.0.1:5000/userscript.user.js 접속
+
+4. 설치
