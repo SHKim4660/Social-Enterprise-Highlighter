@@ -24,9 +24,9 @@ div.box__item-title:hover ~ .socihihover {
   display: inline-block;
   background-image: linear-gradient(
   to right,
-  rgba(251, 247, 25, 0.1),
-  rgba(251, 247, 25, 0.7) 4%,
-  rgba(251, 247, 25, 0.3)
+  rgba(251, 247, 25, 0.5),
+  rgba(251, 247, 25, 0.9) 4%,
+  rgba(251, 247, 25, 0.5)
   );
   margin: 0 -0.4em;
   padding: 0.1em 0.4em;
