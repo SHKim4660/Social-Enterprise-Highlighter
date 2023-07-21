@@ -87,5 +87,7 @@ if __name__ == "__main__":
     if len(sys.argv) >= 2:
         hostname = sys.argv[1]
     
-    app.run(port=5000)
+    from waitress import serve
+    serve(app, host="0.0.0.0", port=8080)
+    # app.run(port=5000)
 
