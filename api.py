@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from typing import Dict, Union, Tuple, Any
 import json
 import csv
@@ -6,6 +6,7 @@ import re
 import trie
 import os
 import sys
+import datetime
 
 def get_file_or_empty(filename: str):
     string = ""
@@ -61,6 +62,19 @@ def api(vendor):
 @app.route('/style.css')
 def css():
     return get_file_or_empty("style.css")
+
+tzinfo = datetime.timezone(datetime.timedelta(hours=+9.0)) # Korea is UTC+9:00
+
+@app.route('/track/<is_social>', methods=['POST'])
+def track(is_social):
+    timestamp = datetime.datetime.now(tzinfo)
+    ip = request.remote_addr
+    social = "0"
+    if is_social == "1": # never trust clients
+        social = "1"
+
+    with open("log.txt", "a") as f:
+        f.write(f"[{timestamp}] {ip}: {social}\n")
     
 if __name__ == "__main__":
     app.run(port=5000)

@@ -26,7 +26,7 @@ function modifydiv(name, vendor, job) {
 function getStyle() {
     GM_xmlhttpRequest(
         {
-            url: "http://127.0.0.1:8081/style.css",
+            url: "http://127.0.0.1:5000/style.css",
             method: "GET",
             onload: (response) => {
                 if (response.status != 200) { return };
@@ -70,7 +70,7 @@ document.querySelectorAll("div.box__item-title").forEach(
                     GM_xmlhttpRequest(
                         {
                             url:
-                                `http://localhost:8081/api/${vendor}`,
+                                `http://localhost:5000/api/${vendor}`,
                             method: "GET",
                             onload: (response) => {
                                 if (response.status != 200) { return; };
