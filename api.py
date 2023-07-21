@@ -65,16 +65,21 @@ def css():
 
 tzinfo = datetime.timezone(datetime.timedelta(hours=+9.0)) # Korea is UTC+9:00
 
-@app.route('/track/<is_social>', methods=['POST'])
-def track(is_social):
+@app.route('/track/<vendor>', methods=['POST'])
+def track(vendor):
     timestamp = datetime.datetime.now(tzinfo)
     ip = request.remote_addr
+
+    is_social = tr.search(vendor)
+    
     social = "0"
-    if is_social == "1": # never trust clients
+    if is_social:
         social = "1"
 
     with open("log.txt", "a") as f:
         f.write(f"[{timestamp}] {ip}: {social}\n")
+
+    return "Success!", 200
     
 if __name__ == "__main__":
     app.run(port=5000)
