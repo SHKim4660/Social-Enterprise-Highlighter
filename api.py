@@ -44,7 +44,7 @@ trie_insert(os.path.join('data', 'data.csv'))
 # 유저스크립트 제공
 @app.route('/userscript.user.js')
 def userscript():
-    return get_file_or_empty("gmarket_highlighter.user.js").replace("$HOST", )
+    return get_file_or_empty("gmarket_highlighter.user.js").replace("$HOST", hostname)
 
 # api 제공
 @app.route('/api/<string:vendor>')
