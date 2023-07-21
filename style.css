@@ -5,9 +5,9 @@
   flex-direction: column;
 
   visibility: hidden;
-  background-color: #7D19FA;
+  background-color: #62FD0D;
   font-size: 16px;
-  color: white;
+  color: black;
   padding: 7px;
   border-radius: 6px;
   z-index: 9999;
