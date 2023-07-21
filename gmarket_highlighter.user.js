@@ -2,10 +2,8 @@
 // @name        Social Enterprise Highlighter - gmarket.com
 // @namespace   Violentmonkey Scripts
 // @match       https://browse.gmarket.co.kr/search
-// @resource    myStyle http://127.0.0.1:8081/style.css
 // @grant       GM_xmlhttpRequest
 // @grant       GM_addStyle
-// @grant       GM_getResourceText
 // @version     1.0.1
 // @author      hyc3573
 // @description 2023. 3. 26. 오후 3:47:01
@@ -40,7 +38,6 @@ function getStyle() {
     )
 }
 
-// GM_addStyle(GM_getResourceText('myStyle'));
 getStyle();
 
 document.querySelectorAll("div.box__item-title").forEach(
