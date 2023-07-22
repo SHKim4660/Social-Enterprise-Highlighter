@@ -31,7 +31,9 @@ def trie_insert(filename):
     for line in reader:
         # TODO
         name = line[0][:-1]
-        job = "한국사회적기업진흥원 선정"  if line[0][-1] else "K-RE100 참여기업"
+        if "백산" in name:
+            print(line, line[0][-1])
+        job = "한국사회적기업진흥원 선정"  if line[0][-1] == 0 else "K-RE100 참여기업"
 
         tr.insert(name, job)
     file.close()
