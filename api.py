@@ -88,6 +88,6 @@ if __name__ == "__main__":
         hostname = sys.argv[1]
     
     from waitress import serve
-    serve(app, host="0.0.0.0", port=8080)
+    serve(app, host="0.0.0.0", port=5000)
     # app.run(port=5000)
 
