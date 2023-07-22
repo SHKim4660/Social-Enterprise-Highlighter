@@ -16,3 +16,6 @@ Social Enterprise Highlighter (SEH)
 3. 127.0.0.1:5000/userscript.user.js 접속
 
 4. 설치
+
+### 실제 서버
+http://146.56.104.182:5000/
