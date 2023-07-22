@@ -82,6 +82,10 @@ def track(vendor):
         f.write(f"[{timestamp}] {ip}: {social}\n")
 
     return "Success!", 200
+
+@app.route('/')
+def index():
+    return get_file_or_empty("index.html")
     
 if __name__ == "__main__":
     if len(sys.argv) >= 2:
