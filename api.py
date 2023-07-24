@@ -10,7 +10,7 @@ import datetime
 import random
 
 hostname = "127.0.0.1:5000"
-shutoff = False
+shutoff = False 
 
 def get_file_or_empty(filename: str):
     string = ""
@@ -97,6 +97,8 @@ def index():
 if __name__ == "__main__":
     if len(sys.argv) >= 2:
         hostname = sys.argv[1]
+    if len(sys.argv) >= 3:
+        shutoff = sys.argv[2] == "shutoff"
     
     from waitress import serve
     serve(app, host="0.0.0.0", port=5000)
