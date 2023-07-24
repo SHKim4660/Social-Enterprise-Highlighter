@@ -7,8 +7,10 @@ import trie
 import os
 import sys
 import datetime
+import random
 
 hostname = "127.0.0.1:5000"
+shutoff = False
 
 def get_file_or_empty(filename: str):
     string = ""
@@ -58,10 +60,13 @@ def api(vendor):
     pro_pro_vendor = f"{pro_vendor}7"
     # 트라이에 있으면
     serch = tr.search(pro_vendor)
-    if serch is not None:
+    if serch is not None and not shutoff:
         return serch, 200
+    elif not shutoff:
+        return "NOP", 404
     else:
         return "NOP", 404
+        
 
 @app.route('/style.css')
 def css():
@@ -81,7 +86,7 @@ def track(vendor):
         social = "1"
 
     with open("log.txt", "a") as f:
-        f.write(f"[{timestamp}] {ip}: {social}\n")
+        f.write(f"[{timestamp}] {ip}: {social}, {shutoff}, {vendor}\n")
 
     return "Success!", 200
 
