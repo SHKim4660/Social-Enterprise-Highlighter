@@ -48,6 +48,19 @@ def get_data(name,page,perpage):
             save_data(os.path.join('data', 'data.csv'),data_list)
             print(data_list)
 
+        if name == "환경부지정녹색기업":
+            url = f"https://api.odcloud.kr/api/15088556/v1/uddi:1f246f9f-d92a-4fe2-8991-907e19d2ee5d?page={page}&perPage={perpage}&serviceKey=U7TCyPP1H%2FdN%2FNSqmby2ep6u9Mp2IJ%2BymK4QhmZ%2FxkX7C4%2BIHA%2BCdHYHsGXEkIFvf%2FzYC4lwD1X02l0RC3d4nA%3D%3D"
+            api_response = requests.get(url)
+            api_data = json.loads(api_response.content)
+            for i in range(perpage):
+                raw_data = api_data.get("data")[i].get("업체명")
+                pro_data = re.sub(pattern=pattern, repl='', string= raw_data).replace("㈜","").replace("유)","").replace("주)","").replace("사)","").replace(" ","").replace("주식회사","").replace("사단법인","")
+                pro_pro_data = f"{pro_data}3"
+                data_list.append([pro_pro_data])
+
+            save_data(os.path.join('data', 'data.csv'),data_list)
+            print(data_list)
+
     except(IndexError,TypeError):print(name,"ERROR!!!!!!!")
 
 #파일에 데이터 저장
@@ -67,3 +80,6 @@ for i in range(300):
 print("--------------------------장애인기업정보-------------------------")
 for i in range(6000): 
     get_data("장애인기업정보",i,1)
+print("------------------------환경부지정녹색기업-----------------------")
+for i in range(110): 
+    get_data("환경부지정녹색기업",i,1)
