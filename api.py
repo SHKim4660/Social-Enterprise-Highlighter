@@ -52,8 +52,16 @@ else : pass
 
 # 유저스크립트 제공
 @app.route('/gmarket-userscript.user.js')
-def userscript():
+def g_userscript():
     return get_file_or_empty("gmarket_highlighter.user.js").replace("$HOST", hostname)
+
+@app.route('/coupang-userscript.user.js')
+def c_userscript():
+    return get_file_or_empty("coupang_highlighter.user.js").replace("$HOST", hostname)
+
+@app.route('/11st-userscript.user.js')
+def e_userscript():
+    return get_file_or_empty("11st_highlighter.user.js").replace("$HOST", hostname)
 
 # api 제공
 @app.route('/api/<string:vendor>')
