@@ -8,6 +8,7 @@ import os
 import sys
 import datetime
 import random
+import os.path   
 
 hostname = "127.0.0.1:5000"
 shutoff = False 
@@ -42,6 +43,10 @@ def trie_insert(filename):
 
 # 트라이에 데이터 삽입
 trie_insert(os.path.join('data', 'data.csv'))
+
+if os.path.isfile('exdata.csv'):
+    trie_insert(os.path.join('exdata', 'exdata.csv'))
+else : pass
 # trie_insert(os.path.join('data', 'pro_name_data.csv'))
 # trie_insert(os.path.join('data', 'pro_KRE_data.csv'))
 
@@ -64,7 +69,7 @@ def api(vendor):
     global tr
     # cleaning
     pattern = r'\([^)]*\)'
-    pro_vendor = re.sub(pattern=pattern, repl='', string= vendor).replace("㈜","").replace("유)","").replace("주)","").replace("사)","").replace(" ","").replace("주식회사","").replace("사단법인","")
+    pro_vendor = re.sub(pattern=pattern, repl='', string= vendor).replace("㈜","").replace("유)","").replace("주)","").replace("사)","").replace(" ","").replace("주식회사","").replace("사단법인","").replace("상사","").replace("식품","")
     pro_pro_vendor = f"{pro_vendor}7"
     # 트라이에 있으면
     serch = tr.search(pro_vendor)
