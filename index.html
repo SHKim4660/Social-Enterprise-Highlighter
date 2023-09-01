@@ -17,4 +17,15 @@
       <li>'설치 확인' 버튼 클릭</li>
     </ol>
   </div>
+  <div class="container">
+    <h2>기업 등록:</h2>
+    <form action="/submit" method="post">
+      <input type="text" id="name" name="name" value="기업명"><br>
+      <input type="radio" id="re100" name="type" value="re">
+      <label for="re100">K-RE100 참여기업</label><br>
+      <input type="radio" id="social" name="type" value="so">
+      <label for="social">사회적 기업</label><br>
+      <button type="submit">확인</button>
+      </form>
+  </div>
 </body>

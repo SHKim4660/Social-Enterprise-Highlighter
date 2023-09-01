@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, redirect
 from typing import Dict, Union, Tuple, Any
 import json
 import csv
@@ -9,6 +9,7 @@ import sys
 import datetime
 import random
 import os.path   
+import DB_Manager as dbm
 
 hostname = "127.0.0.1:5000"
 shutoff = False 
@@ -81,9 +82,14 @@ def api(vendor):
         return "NOP", 404
         
 
-@app.route('/style.css')
-def css():
-    return get_file_or_empty("style.css")
+@app.route('/style-g.css')
+def cssg():
+    return get_file_or_empty("style-g.css")
+
+@app.route('/style-1.css')
+def css1():
+    return get_file_or_empty("style-1.css")
+
 
 tzinfo = datetime.timezone(datetime.timedelta(hours=+9.0)) # Korea is UTC+9:00
 
@@ -106,6 +112,20 @@ def track(vendor):
 @app.route('/')
 def index():
     return get_file_or_empty("index.html")
+
+@app.route('/submit', methods=["POST"])
+def submit():
+    print(request.form)
+    typ = 0
+    if request.form['type'] == 'so':
+        typ = 0
+    else:
+        typ = 1
+
+    dbm.add_data(os.path.join('data', 'need_approval.csv'),
+             f"{request.form['name']}{typ}")
+
+    return redirect("/")
     
 if __name__ == "__main__":
     if len(sys.argv) >= 2:

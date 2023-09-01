@@ -27,7 +27,7 @@ function modifydiv(name, vendor, job) {
 function getStyle() {
     GM_xmlhttpRequest(
         {
-            url: "http://$HOST/style.css",
+            url: "http://$HOST/style-g.css",
             method: "GET",
             onload: (response) => {
                 if (response.status != 200) { return };
