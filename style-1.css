@@ -1,0 +1,33 @@
+.socihi-hover-elem {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+
+  visibility: hidden;
+  background-color: #62FD0D;
+  font-size: 16px;
+  color: black;
+  padding: 7px;
+  border-radius: 6px;
+  z-index: 9999;
+  position: absolute;
+}
+a.socihi-hover-parent:hover ~ div.c-card-item__info > div.c-card-item__info-top > dl > div.socihi-hover-elem {
+  visibility: visible;
+  height: 30px;
+}
+
+.socihi-highlight {
+  background-color: transparent;
+  display: inline-block;
+  background-image: linear-gradient(
+  to right,
+  rgba(251, 247, 25, 0.5),
+  rgba(251, 247, 25, 0.9) 4%,
+  rgba(251, 247, 25, 0.5)
+  );
+  margin: 0 -0.4em;
+  padding: 0.1em 0.4em;
+  border-radius: 0.8em 0.3em;
+}
