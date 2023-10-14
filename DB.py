@@ -15,7 +15,7 @@ def get_data(name,page,perpage):
             api_data = json.loads(api_response.text)
             for i in range(perpage):
                  raw_data = api_data.get("data")[i].get("entNmV")  # 데이터를 받아와서 리스트 형태로 취합
-                 pro_data = re.sub(pattern=pattern, repl='', string= raw_data).replace("㈜","").replace("유)","").replace("주)","").replace("사)","").replace(" ","").replace("주식회사","").replace("사단법인","").replace("상사","").replace("식품","")
+                 pro_data = re.sub(pattern=pattern, repl='', string= raw_data).replace("㈜","").replace("유)","").replace("주)","").replace("사)","").replace(" ","").replace("주식회사","").replace("사단법인","")
                  pro_pro_data = f"{pro_data}0"
                  data_list.append([pro_pro_data])
               
